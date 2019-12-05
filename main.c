@@ -3,3 +3,9 @@
 
 //Main Function - Group Edit
 
+#include <stdio.h>
+#include <string.h>
+
+#define NUM 10    // Number of scores listed in scoreboard
+#define SIZE 20  // Max length of names on Scoreboard
+
