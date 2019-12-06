@@ -10,6 +10,9 @@ void updateScores (int argc, char* argv[], char newName[], int newScore)
 	FILE* fp1;
 	char ch1;
 	int num;
+	
+	int scores[NUM];
+	char names[][len];	
 
 	if (argc != 3)
 	{
@@ -29,7 +32,7 @@ void updateScores (int argc, char* argv[], char newName[], int newScore)
 
 
 	getScores (NUM, scores);
-	sortScores (NUM, SIZE, scores);
+	sortScores (NUM, SIZE, scores, names);
 	addNewScore (NUM, newName, scores);
 
 
@@ -37,14 +40,15 @@ void getScores(int num, int scores[])
 {
 	for (int i=0; i<num; i++)
 	{
-		fscanf(fp1, "%d", scores[i]);
+		fscanf(fp1, "%s %d", &names[i], &scores[i]);
 	}
 }
 	
 
-void sortScores(int num, int len, int scores[])
+void sortScores(int num, int len, int scores[], char names[][len])
 {
-	int temp;
+	int tempscore;
+	char tempname[len];
 	_Bool swap = 0;
 	
 	do
@@ -54,9 +58,12 @@ void sortScores(int num, int len, int scores[])
 		{
 			if (scores[i+1] > scores[i])
 			{
-				temp = scores[i+1];
+				tempscore = scores[i+1];
+				tempname = names[i+1];
 				scores[i+1] = scores[i];
-				scores[i] = temp;
+				names[i+1] = names[i];
+				scores[i] = tempscore;
+				names[i] = tempname;
 				swap = 1;
 			}
 			
@@ -85,7 +92,4 @@ void addnewScore (int num, int newScore, char newName, int scores[])
 	}
 }
 				
-		
-
-	
-
+// C Board Saving Scoreboard in .txt file
