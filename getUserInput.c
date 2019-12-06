@@ -14,30 +14,30 @@ _Bool(int *row, int *col, int coord[][], int difficulty, int result){
   case 1:
   
   printf("Enter coordinates from 1 to 2.\n");
-  scanf("%d %d", row, col);
+  scanf("%d %d", coord{row}{}, coord{}{col});
 
   printf("Enter coordinates from 1 to 2.\n");
-  scanf("%d %d", row, col);
+  scanf("%d %d", coord{row}{}, coord{}{col});
   
   gameWon(result);
   break;
 
   case 2:
   printf("Enter coordinates from 1 to 4.\n");
-  scanf("%d %d", row, col);
+  scanf("%d %d", coord{row}{}, coord{}{col});
   
   printf("Enter coordinates from 1 to 4.\n");
-  scanf("%d %d", row, col);
+  scanf("%d %d", coord{row}{}, coord{}{col});
 
   gameWon(result);
   break;
   
   case 3:
   printf("Enter coordinates from 1 to 6.\n");
-  scanf("%d %d", row, col);
+  scanf("%d %d", coord{row}{}, coord{}{col});
 
   printf("Enter coordinates from 1 to 4.\n");
-  scanf("%d %d", row, col);
+  scanf("%d %d", coord{row}{}, coord{}{col});
 
   gameWon(result);
   break;
