@@ -1,8 +1,8 @@
 //Kaylyn Caselli	NetID: kaylync
 //CS135.1001		Project 9
 
-// Update a Scoreboard
-
+// Update a Scoreboard						//***I'm starting a new code to better line up with the design doc
+								// So this will likely change but variables should be same
 // #define NUM 10	//number of scores listed in scoreboard
 
 void updateScores (int argc, char* argv[], char newName[], int newScore)
