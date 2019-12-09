@@ -1,4 +1,4 @@
-//Kaylyn Caselli	NetID: kaylync
+//Kaylyn Caselli	NetID: kaylync		**** SEE scores.c FILE INSTEAD ****
 //CS135.1001		Project 9
 
 // Update a Scoreboard						//***I'm starting a new code to better line up with the design doc
