@@ -10,15 +10,15 @@
 #define LENGTH 20
 
 void saveScore(int newScore);
-int readScores(int scores[], char names[]);
-void writeScores(int numScores, int scores[], char names[]);
+int readScores(int *scores[], char *names[]);
+void writeScores(int numScores, int *scores[], char *names[]);
 
 int main()
 {
 
 	int newScore;
 
-	saveScore(int newScore);
+	saveScore(newScore);
 
 	return 0;
 }
@@ -26,14 +26,14 @@ int main()
 
 void saveScore(int newScore)
 {
-	int scores[];
-	char names[];
-	int newName;
+	int scores[NUM];
+	char names[NUM];
+	char newName;
 	int tempscore;
 	char tempname;	
 	int numScores;
 	
-	numScores = readScores(scores[], names[]);
+	numScores = readScores(&scores, &names);
 
 	printf("Enter name: ");			// Edit display to executible
 	scanf("%s", &newName);
@@ -46,8 +46,8 @@ void saveScore(int newScore)
 			scores[i] = newScore;
 			newScore = tempscore;
 			
-			strcpy(tempname, list[i]);
-			strcpy(list[i], newName);
+			strcpy(tempname, names[i]);
+			strcpy(names[i], newName);
 			strcpy(newName, tempname);
 		}
 		else if (i = numScores-1)
@@ -61,52 +61,50 @@ void saveScore(int newScore)
 		}
 	}
 	
-	writeScores(numScores, scores[], names[]);
+	writeScores(numScores, scores, names);
 	
 }
 
 
-int readScores(int scores[], char names[])
+int readScores(int *scores[], char *names[])
 {
 	FILE* scores_fp;	
 	int arrIndex=0;
 	int count=0;
+	char filename[] = "scores.txt";
 
-	scores_fp = fopen(scores.txt, "r");	
-	
-	if (scores_fp == NULL)
+	if (scores_fp = fopen(filename, "r") == NULL)
 	{
-		fprintf(stderr, "Can't open scores.txt);
+		fprintf(stderr, "Can't open scores.txt\n");
 		return 1;
 	}
 	
-	while (scores_fp == 1)
+	while (scores_fp = fopen(filename, "r") == 1)
 	{		
-		fscanf(scores.txt, "%s %d", &names[arrIndex];
+		fscanf(scores_fp, "%s %d", &names[arrIndex]);
 		count++;
 		arrIndex++;
 	}
 	
-	fclose (scores.txt);
+	fclose (scores_fp);
 
 	return count;
 }
 
 
-void writeScores(int numScores, int scores[], char names[])
+void writeScores(int numScores, int *scores[], char *names[])
 {
 	FILE* scores_fp;	
+	char filename[] = "scores.txt";	
 
-	scores_fp = fopen(scores.txt, "w");
-	
-	if (scores_fp == 1)
+	if (scores_fp = fopen(filename, "w") == 1)
 	{
 		for (int i=0; i<numScores; i++)
 		{
-			fprintf(scores.txt, "%s %d\n", names[i], scores[i]);
+			fprintf(scores_fp, "%s %d\n", names[i], scores[i]);
 		}
-	
-	fclose (scores.txt);
+	}
+	fclose (scores_fp);
 }
 
 
