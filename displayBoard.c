@@ -4,7 +4,7 @@
 // Display Memory Game Board
 
 
-void displayBoard (int nrow, int ncol, char symArr[nrow][ncol], _Bool matchedArr)
+void displayBoard (int diff_size, char symArr[diff_size][diff_size], _Bool matchedArr)
 {
 	/* Code to update matched array (put into main function)
 	
