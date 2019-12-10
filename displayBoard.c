@@ -8,12 +8,14 @@ void displayBoard (int diff_size, char symArr[diff_size][diff_size], _Bool match
 {
 	/* Code to update matched array (put into main function)
 	
-	_Bool matchedArr[nrow][ncol];	// true = matched -> "flip" ; false = unmatched -> "facedown"	
+	_Bool matchedArr[nrow][ncol];	// true = matched -> "flip" ; false = unmatched -> "facedown"
+	int num_matches = 0;
 
 	if (symArr[rowc1][colc1] == symArr[rowc2][colc2])
 	{
 		matchedArr[rowc1][colc1] = 1;
-		matchedArr[rowc1][colc2] = 1;
+		matchedArr[rowc2][colc2] = 1;
+		num_matches++;
 	}
 	*/
 
@@ -30,6 +32,9 @@ void displayBoard (int diff_size, char symArr[diff_size][diff_size], _Bool match
 				printf("[%c] ", symArr[ri][ci]);
 			}
 		}
+		printf("\n");
 	}
+	
+	
 			
 }
