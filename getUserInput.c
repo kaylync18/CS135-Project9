@@ -1,47 +1,44 @@
 //
-//obtains coordinates for selecting cards
+//gets coordinates input by the user to flip designated cards in an array.
 //
 
-_Bool(int *row, int *col, int coord[][], int difficulty, int result){
+#include <stdio.h>
 
-  getDifficulty(difficulty);
-  displayBoard()
+_Bool(int row, int col, int coord[][], int SIZE, int match){
 
-  
- do{
-  switch(difficulty){
-  
-  case 1:
-  
-  printf("Enter coordinates from 1 to 2.\n");
-  scanf("%d %d", coord{row}{}, coord{}{col});
+getDifficulty=SIZE;
+checkMatch=match;
 
-  printf("Enter coordinates from 1 to 2.\n");
-  scanf("%d %d", coord{row}{}, coord{}{col});
-  
-  gameWon(result);
-  break;
+switch(SIZE){
 
-  case 2:
-  printf("Enter coordinates from 1 to 4.\n");
-  scanf("%d %d", coord{row}{}, coord{}{col});
-  
-  printf("Enter coordinates from 1 to 4.\n");
-  scanf("%d %d", coord{row}{}, coord{}{col});
+case 1:
+do{
+printf("Enter your coordinates from 1 to 2\n");
+scanf("%d %d", &row, &col);
+printf("Enter your coordinates from 1 to 2\n");
+scanf("%d %d", &row, &col);
+}while(match!=1);
+break;
 
-  gameWon(result);
-  break;
-  
-  case 3:
-  printf("Enter coordinates from 1 to 6.\n");
-  scanf("%d %d", coord{row}{}, coord{}{col});
+case 2:
+do{
+printf("Enter your coordinates from 1 to 4\n");
+scanf("%d %d", &row, &col);
+printf("Enter your coordinates from 1 to 4\n");
+scanf("%d %d", &row, &col);
+}while(match!=1);
+break;
 
-  printf("Enter coordinates from 1 to 4.\n");
-  scanf("%d %d", coord{row}{}, coord{}{col});
-
-  gameWon(result);
-  break;
-  }
- }while(result!=1)
+case 3:
+do{
+printf("Enter your coordinates from 1 to 6\n");
+scanf("%d %d", &row, &col);
+printf("Enter your coordinates from 1 to 6\n");
+scanf("%d %d", &row, &col);
+}while(match!=1);
+return 0;
+break;
 }
 
+return 1;
+}
