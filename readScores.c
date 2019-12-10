@@ -22,7 +22,7 @@ if(outScore==NULL){
   fprintf(stderr, "Can't open input file scoreboard.txt!\n");
 }
 
-while(fscanf(inScores, "%s %d", names, &saved)==10){
+while(fscanf(inScores, "%s %d", names, &saved)!=10){
  fprintf(outScore, "%s %d\n", names, saved);
 }
 
