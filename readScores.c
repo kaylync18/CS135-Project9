@@ -1,31 +1,32 @@
 //
-//
+//displays names and scores of top ten players
 //
 
 #include <stdio.h>
-#ifndef scoreboard.c
 
-#include <scoreboard.c>
+void readScores(char names[21], int saved){
 
-int displayScores(int argc, char* argv[])
-{
- 
- int display;
- FILE *outScore;
+FILE *inScores, *outScore;
+char *mode="r";
+char readScore[]="scores.txt";
 
-  if (argc!=2){
-	printf("Usage: ./scoreboard.c inScore outScore\n");
-	return 0;
-	}
-  if ((outScore=fopen(argv[1], "r"))==NULL){
-	printf("Can't open %s.\n",argv[1]);
-	return 0;
-	}
-  while(fscanf(outScore, "%d", &display)==1){
-	printf("%d", display);
-	}
+inScores=fopen(inScores, "r");
 
-  fclose(outScore);
-  return 0;
+if (inScores==NULL){
+  fprintf(stderr, "Can't open input file scores.txt!\n");
+}
+
+outScore=fopen(inScores, "a");
+
+if(outScore==NULL){
+  fprintf(stderr, "Can't open input file scoreboard.txt!\n");
+}
+
+while(fscanf(inScores, "%s %d", names, &saved)==10){
+ fprintf(outScore, "%s %d\n", names, saved);
+}
+
+fclose(inScores);
+fclose(outScore);
 
 }
