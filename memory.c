@@ -22,7 +22,7 @@ int playGame (int diff_size, char symbols[diff_size][diff_size]);
 void displayBoard (int diff_size, char symArr[diff_size][diff_size], _Bool matchedArr);
 void saveScore(int newScore);
 void writeScores(int numScores, int *scores[], char *names[]);
-_Bool checkMatch(char symArr[], int r1, int c1, int r2, int c2);
+_Bool checkMatch(int diff_size, char symArr[diff_size][diff_size], int r1, int c1, int r2, int c2);
 void getUserInput (int *row, int *col, int diff_size);
 int readScores(int *scores[], char *names[]);
 
@@ -117,7 +117,7 @@ int playGame (int diff_size, char symbols[diff_size][diff_size])
 		scorecount++;
 		getUserInput(&r1, &c1, diff_size);
 		getUserInput(&r2, &c2, diff_size);
-		if (checkMatch(symbols, r1, c1, r2, c2) == 1)
+		if (checkMatch(diff_size, symbols, r1, c1, r2, c2) == 1)
 		{
 			matchedArr[r1][c1] = 1;
 			matchedArr[r2][c2] = 1;
@@ -168,7 +168,7 @@ void assignSpots(int size, int value[36], int symbol[36], int board[6][6])
 }
 
 
-_Bool checkMatch(char symArr[], int r1, int c1, int r2, int c2)
+_Bool checkMatch(int diff_size, char symArr[diff_size][diff_size], int r1, int c1, int r2, int c2)
 {
 	if (symArr[r1][c1] == symArr[r2][c2])
 	{
