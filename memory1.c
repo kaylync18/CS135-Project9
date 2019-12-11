@@ -18,13 +18,13 @@
 int getMenuChoice();
 void randomizedBoard (int size, int arr[]);
 void assignSpots( int size, int value[36], int symbol[36], int board[6][6]);
-int playGame (int diff_size, int symbols[diff_size][diff_size]);
-void displayBoard(int diff_size, int symArr[diff_size][diff_size], _Bool matchedArr[diff_size][diff_size]);
+int playGame (int diff_size, int symbols[diff_size][diff_size]); //
+void displayBoard(int diff_size, int symArr[diff_size][diff_size], _Bool matchedArr[diff_size][diff_size]);//
 void saveScore(int newScore);
 void writeScores(int numScores, int *scores[], char *names[]);
-_Bool checkMatch(int diff_size, int symArr[diff_size][diff_size], int r1, int c1, int r2, int c2);
+_Bool checkMatch(int diff_size, int symArr[diff_size][diff_size], int r1, int c1, int r2, int c2);//
 void getUserInput (int *row, int *col, int diff_size);
-int readScores(int scores[], char names[]);
+int readScores(int scores[], char names[]);//
 
 int main()
 {
@@ -60,10 +60,10 @@ int main()
 				randomizedBoard(difficulty,value);
 				assignSpots(difficulty, value, symbol, board);
 				
-				score = playGame (difficulty, board);
+				score = playGame (difficulty, board);//
 				
 				printf("Save score?\n1- yes "); 		// Edit display to executable
-				scanf("%d", &save_choice);
+				scanf("%d", &save_choice);//
 				switch (save_choice)
 				{
 					case 1: saveScore(score);
@@ -72,10 +72,10 @@ int main()
 				
 				break;
 			case 2: // Display Scoreboard
-				readScores(scores, names);
+				readScores(scores, names);//
 				for (int i=0; i<difficulty; i++)
 				{
-					printf("%c %d\n", names[i], scores[i]);
+					printf("%c %d\n", names[i], scores[i]);//
 				}
 				break;
 			case 0: flag = 0;
@@ -96,7 +96,7 @@ int getMenuChoice()
 		
 }
 
-int playGame (int diff_size, int symbols[diff_size][diff_size])
+int playGame (int diff_size, int symbols[diff_size][diff_size])//
 {
 	_Bool matchedArr[diff_size][diff_size];	// true = matched -> "flip" ; false = unmatched -> "facedown"
 	int numMatches = 0;
@@ -176,7 +176,6 @@ _Bool checkMatch(int diff_size, int symArr[diff_size][diff_size], int r1, int c1
 	}
 	return 0;
 }
-
 void getUserInput (int *row, int *col, int diff_size)
 {
 	printf("Enter your coordinates from 1 to %d\n", diff_size);
@@ -185,7 +184,7 @@ void getUserInput (int *row, int *col, int diff_size)
 	scanf("%d %d", row, col);
 }
 	
-void displayBoard(int diff_size, int symArr[diff_size][diff_size], _Bool matchedArr[diff_size][diff_size])
+void displayBoard(int diff_size, int symArr[diff_size][diff_size], _Bool matchedArr[diff_size][diff_size])//
 {
 	for (int ri=0; ri<diff_size; ri++)
 	{
@@ -256,15 +255,15 @@ int readScores(int scores[], char names[])
 	int count=0;
 	char filename[] = "scores.txt";
 
-	if ((scores_fp = fopen(filename, "r")) == NULL)
+	if ((scores_fp = fopen(filename, "r")) == NULL)//
 	{
 		fprintf(stderr, "Can't open scores.txt\n");
 		return 1;
 	}
 	
-	while ((scores_fp = fopen(filename, "r")) == 1)
+	while ((scores_fp = fopen(filename, "r")) == 1)//
 	{		
-		fscanf(scores_fp, "%c %d", &names[arrIndex], &count);
+		fscanf(scores_fp, "%c %d", &names[arrIndex], &count);//
 		count++;
 		arrIndex++;
 	}
@@ -280,11 +279,11 @@ void writeScores(int numScores, int *scores[], char *names[])
 	FILE* scores_fp;	
 	char filename[] = "scores.txt";	
 
-	if ((scores_fp = fopen(filename, "w")) == 1)
+	if ((scores_fp = fopen(filename, "w")) == 1)//
 	{
 		for (int i=0; i<numScores; i++)
 		{
-			fprintf(scores_fp, "%c %d\n", names[i], scores[i]);
+			fprintf(scores_fp, "%c %d\n", names[i], scores[i]);//
 		}
 	}
 	fclose (scores_fp);
