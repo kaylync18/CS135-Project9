@@ -19,7 +19,7 @@ int getMenuChoice();
 void randomizedBoard (int size, int arr[]);
 void assignSpots( int size, int value[36], int symbol[36], int board[6][6]);
 int playGame (int diff_size, char symbols[diff_size][diff_size]);
-void displayBoard (int diff_size, char symArr[diff_size][diff_size], _Bool matchedArr);
+void displayBoard (int diff_size, char symArr[diff_size][diff_size], _Bool matchedArr[diff_size][diff_size]);
 void saveScore(int newScore);
 void writeScores(int numScores, int *scores[], char *names[]);
 _Bool checkMatch(int diff_size, char symArr[diff_size][diff_size], int r1, int c1, int r2, int c2);
