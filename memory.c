@@ -63,8 +63,8 @@ int main()
 				
 				score = playGame (difficulty, board);
 				
-				printf("Save score?\n1- yes "); 		// Edit display to executable
-				scanf("%d", save_choice);
+				printf("Save score?\n1- yes: "); 		
+				scanf("%d", &save_choice);
 				switch (save_choice)
 				{
 					case 1: saveScore(score);
@@ -73,7 +73,7 @@ int main()
 				
 				break;
 			case 2: // Display Scoreboard
-				readScores(scores, names);
+				readScores(&scores, &names);
 				for (int i=0; i<difficulty; i++)
 				{
 					printf("%s %d\n", names[i], scores[i]);
@@ -124,7 +124,7 @@ int playGame (int diff_size, char symbols[diff_size][diff_size])
 			matchedArr[r2][c2] = 1;
 			numMatches++;
 			scorecount++;
-			printf("Try Again!\n");			//Edit display to executable
+			printf("MATCHED!\n");			
 		}
 		else 
 		{
@@ -134,7 +134,7 @@ int playGame (int diff_size, char symbols[diff_size][diff_size])
 	} while (numMatches != (diff_size*diff_size)/2);	// Until Game is Won
 	
 	displayBoard(diff_size, symbols, matchedArr);
-	printf ("You won dude!");	// Edit display to executable
+	printf ("YOU WON! ! !\n%d points!\n", scorecount);	
 		
 	return scorecount;
 }
@@ -182,10 +182,11 @@ _Bool checkMatch(int diff_size, char symArr[diff_size][diff_size], int r1, int c
 
 void getUserInput (int *row, int *col, int diff_size)
 {
+	int r, c;
 	printf("Enter your coordinates from 1 to %d\n", diff_size);
-	scanf("%d %d", &row, &col);
-	printf("Enter your coordinates from 1 to %d\n", diff_size);
-	scanf("%d %d", &row, &col);
+	scanf("%d %d", &r, &c);
+	*row = r;
+	*col = c;
 }
 	
 void displayBoard (int diff_size, char symArr[diff_size][diff_size], _Bool matchedArr[diff_size][diff_size])
@@ -221,7 +222,7 @@ void saveScore(int newScore)
 	
 	numScores = readScores(&scores, &names);
 
-	printf("Enter name: ");			// Edit display to executible
+	printf("Enter your name: ");			// Edit display to executible
 	scanf("%s", &newName);
 
 	for (int i=0; i<numScores; i++)
@@ -247,7 +248,7 @@ void saveScore(int newScore)
 		}
 	}
 	
-	writeScores(numScores, scores, names);
+	writeScores(numScores, &scores, &names);
 	
 }
 
@@ -259,13 +260,13 @@ int readScores(int *scores[], char *names[])
 	int count=0;
 	char filename[] = "scores.txt";
 
-	if (scores_fp = fopen(filename, "r") == NULL)
+	if ((scores_fp = fopen(filename, "r")) == NULL)
 	{
 		fprintf(stderr, "Can't open scores.txt\n");
 		return 1;
 	}
 	
-	while (scores_fp = fopen(filename, "r") == 1)
+	while ((scores_fp = fopen(filename, "r")) == 1)
 	{		
 		fscanf(scores_fp, "%s %d", &names[arrIndex]);
 		count++;
@@ -283,8 +284,9 @@ void writeScores(int numScores, int *scores[], char *names[])
 	FILE* scores_fp;	
 	char filename[] = "scores.txt";	
 
-	if (scores_fp = fopen(filename, "w") == 1)
+	if ((scores_fp = fopen(filename, "w")) == 1)
 	{
+		fprintf(scores_fp, "**HIGH SCORES**\n");		
 		for (int i=0; i<numScores; i++)
 		{
 			fprintf(scores_fp, "%s %d\n", names[i], scores[i]);
