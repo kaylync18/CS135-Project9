@@ -12,8 +12,10 @@ void randomizedBoard (int size, int arr[]);
 void assignSpots( int size, int value[36], int symbol[36], int board[6][6]);
 //void generateBoard(int size);
 //void checkMatch(int size, int board[6][6],int xy[4],int match);
+int playGame (int diff_size, char symbols[diff_size][diff_size])
 _Bool checkMatch(char symArr[], int r1, int c1, int r2, int c2);
 void getUserInput (int *row, int *col, int diff_size);
+int readScores(int *scores[], char *names[]);
 
 int main()
 {
@@ -37,14 +39,20 @@ int main()
 	{
 		switch (choice= getMenuChoice())
 		{
-			case 1: printf ("Enter Difficulty (1, 2, or 3): \n");
+			case 1: //Play Game
+				printf ("Enter Difficulty (1, 2, or 3): \n");
 				scanf ("%d", &difficultylevel);
 				difficulty = difficultylevel * 2;
 				randomizedBoard(difficulty,value);
 				assignSpots(difficulty, value, symbol, board);
 				playGame (difficulty, board);
 				break;
-			case 2: //
+			case 2: // Display Scoreboard
+				readScores(scores, names);
+				for (int i=0; i<difficulty; i++)
+				{
+					printf("%s %d\n", names[i], scores[i]);
+				}
 				break;
 			case 0: flag = 0;
 				break;
@@ -64,10 +72,11 @@ int getMenuChoice()
 		
 }
 
-void playGame (int diff_size, char symbols[diff_size][diff_size])
+int playGame (int diff_size, char symbols[diff_size][diff_size])
 {
-	_Bool matchedArr[nrow][ncol];	// true = matched -> "flip" ; false = unmatched -> "facedown"
+	_Bool matchedArr[diff_size][diff_size];	// true = matched -> "flip" ; false = unmatched -> "facedown"
 	int numMatches = 0;
+	int scorecount = 0;
 	
 	for (int ri=0; ri<diff_size; ri++)
 	{
@@ -80,16 +89,25 @@ void playGame (int diff_size, char symbols[diff_size][diff_size])
 	do 
 	{
 		displayBoard(difficulty, value, matchedArr);
-		getUserInput(&row, &col, diff_size);
-		getUserInput(&row, &col, diff_size);
+		scorecount++;
+		getUserInput(&r1, &c1, diff_size);
+		getUserInput(&r2, &c2, diff_size);
 		if (checkMatch(symbols, r1, c1, r2, c2) == 1)
 		{
-			matchedArr[rowc1][colc1] = 1;
-			matchedArr[rowc2][colc2] = 1;
+			matchedArr[r1][c1] = 1;
+			matchedArr[r2][c2] = 1;
 			numMatches++;
+			scorecount++;
 		}
-		displayBoard(difficulty, value, matchedArr);
-	} while (numMatches != (difficulty*difficulty)/2);
+	displayBoard(difficulty, value, matchedArr);
+	printf ("You won dude!")	// Edit display to executable
+		
+	return scorecount;
+		
+	} while (numMatches != (difficulty*difficulty)/2);	// Until Game is Won
+	
+	displayBoard(difficulty, value, matchedArr);
+	
 	
 }
 
@@ -160,6 +178,93 @@ void displayBoard (int diff_size, char symArr[diff_size][diff_size], _Bool match
 		printf("\n");
 	}			
 }
+
+
+
+// Score Handling
+void saveScore(int newScore)
+{
+	int scores[NUM];
+	char names[NUM];
+	char newName;
+	int tempscore;
+	char tempname;	
+	int numScores;
+	
+	numScores = readScores(&scores, &names);
+
+	printf("Enter name: ");			// Edit display to executible
+	scanf("%s", &newName);
+
+	for (int i=0; i<numScores; i++)
+	{
+		if (newScore > scores[i])
+		{
+			tempscore = scores[i];
+			scores[i] = newScore;
+			newScore = tempscore;
+			
+			strcpy(tempname, names[i]);
+			strcpy(names[i], newName);
+			strcpy(newName, tempname);
+		}
+		else if (i = numScores-1)
+		{
+			scores[i] = newScore;
+		}
+		
+		if (numScores < NUM)
+		{
+			numScores++;
+		}
+	}
+	
+	writeScores(numScores, scores, names);
+	
+}
+
+
+int readScores(int *scores[], char *names[])
+{
+	FILE* scores_fp;	
+	int arrIndex=0;
+	int count=0;
+	char filename[] = "scores.txt";
+
+	if (scores_fp = fopen(filename, "r") == NULL)
+	{
+		fprintf(stderr, "Can't open scores.txt\n");
+		return 1;
+	}
+	
+	while (scores_fp = fopen(filename, "r") == 1)
+	{		
+		fscanf(scores_fp, "%s %d", &names[arrIndex]);
+		count++;
+		arrIndex++;
+	}
+	
+	fclose (scores_fp);
+
+	return count;
+}
+
+
+void writeScores(int numScores, int *scores[], char *names[])
+{
+	FILE* scores_fp;	
+	char filename[] = "scores.txt";	
+
+	if (scores_fp = fopen(filename, "w") == 1)
+	{
+		for (int i=0; i<numScores; i++)
+		{
+			fprintf(scores_fp, "%s %d\n", names[i], scores[i]);
+		}
+	}
+	fclose (scores_fp);
+}
+
 
 /*void generateBoard(int size)
 {
