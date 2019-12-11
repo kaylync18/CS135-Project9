@@ -1,4 +1,4 @@
-// Aaron's code / Edited by Kaylyn & Aaron
+// Group's combined code / Edited by Kaylyn
 
 #include <stdio.h>
 #include <time.h>
