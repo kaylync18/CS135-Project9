@@ -185,7 +185,7 @@ void getUserInput (int *row, int *col, int diff_size)
 	scanf("%d %d", &row, &col);
 }
 	
-void displayBoard (int diff_size, char symArr[diff_size][diff_size], _Bool matchedArr)
+void displayBoard (int diff_size, char symArr[diff_size][diff_size], _Bool matchedArr[diff_size][diff_size])
 {
 	for (int ri=0; ri<diff_size; ri++)
 	{
