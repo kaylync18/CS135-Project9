@@ -10,21 +10,15 @@
 int getMenuChoice();
 void randomizedBoard (int size, int arr[]);
 void assignSpots( int size, int value[36], int symbol[36], int board[6][6]);
-void generateBoard(int size);
-void checkMatch(int size, int board[6][6],int xy[4],int match);
+//void generateBoard(int size);
+//void checkMatch(int size, int board[6][6],int xy[4],int match);
 _Bool checkMatch(char symArr[], int r1, int c1, int r2, int c2);
+void getUserInput (int *row, int *col, int diff_size);
 
 int main()
 {
 	int difficultylevel, difficulty, root,choice, value[36], board[6][6], xy[73], match = 0;
-	int symbolReference[6][6] = { 
-	{32, 32, 32, 32, 32, 32},
-	{32, 32, 32, 32, 32, 32},
-	{32, 32, 32, 32, 32, 32},
-	{32, 32, 32, 32, 32, 32},
-	{32, 32, 32, 32, 32, 32},
-	{32, 32, 32, 32, 32, 32}
-	}; //blank spaces for face down card
+	
 	int symbol[36] = { 
 	33, 33, 34, 34,
 	35, 35, 36, 36,
@@ -74,14 +68,26 @@ void playGame (int diff_size, char symbols[diff_size][diff_size])
 {
 	_Bool matchedArr[nrow][ncol];	// true = matched -> "flip" ; false = unmatched -> "facedown"
 	int numMatches = 0;
-	if (checkMatch(symbols, r1, c1, r2, c2) == 1)
+	
+	for (int ri=0; ri<diff_size; ri++)
 	{
-		matchedArr[rowc1][colc1] = 1;
-		matchedArr[rowc2][colc2] = 1;
-		numMatches++;
+		for (int ci=0; ci<diff_size; ci++)
+		{
+			matchedArr[ri][ci] = 0;		// preset each element to false (unmatched)
+		}
 	}
-	do
+	
+	do 
 	{
+		displayBoard(difficulty, value, matchedArr);
+		getUserInput(&row, &col, diff_size);
+		getUserInput(&row, &col, diff_size);
+		if (checkMatch(symbols, r1, c1, r2, c2) == 1)
+		{
+			matchedArr[rowc1][colc1] = 1;
+			matchedArr[rowc2][colc2] = 1;
+			numMatches++;
+		}
 		displayBoard(difficulty, value, matchedArr);
 	} while (numMatches != (difficulty*difficulty)/2);
 	
@@ -116,6 +122,43 @@ void assignSpots(int size, int value[36], int symbol[36], int board[6][6])
 				count++;
 			}
 	}
+}
+
+
+_Bool checkMatch(char symArr[], int r1, int c1, int r2, int c2)
+{
+	if (symArr[rowc1][colc1] == symArr[rowc2][colc2])
+	{
+		return 1;
+	}
+	return 0;
+}
+
+void getUserInput (int *row, int *col, int diff_size)
+{
+	printf("Enter your coordinates from 1 to %d\n", diff_size);
+	scanf("%d %d", &row, &col);
+	printf("Enter your coordinates from 1 to %d\n", diff_size);
+	scanf("%d %d", &row, &col);
+}
+	
+void displayBoard (int diff_size, char symArr[diff_size][diff_size], _Bool matchedArr)
+{
+	for (int ri=0; ri<nrow; ri++)
+	{
+		for (int ci=0; ci<numc; ci++)
+		{
+			if (matchedArr[ri][ci] == 0)
+			{
+				printf("[ ] ");
+			}
+			else if (matchedArr[ri][ci] == 1)
+			{
+				printf("[%c] ", symArr[ri][ci]);
+			}
+		}
+		printf("\n");
+	}			
 }
 
 /*void generateBoard(int size)
@@ -198,43 +241,3 @@ void assignSpots(int size, int value[36], int symbol[36], int board[6][6])
 	
 }
 */
-
-_Bool checkMatch(char symArr[], int r1, int c1, int r2, int c2)
-{
-	if (symArr[rowc1][colc1] == symArr[rowc2][colc2])
-	{
-		return 1;
-	}
-	return 0;
-}
-	
-void displayBoard (int diff_size, char symArr[diff_size][diff_size], _Bool matchedArr)
-{
-	/* Code to update matched array (put into main function)
-	
-	_Bool matchedArr[nrow][ncol];	// true = matched -> "flip" ; false = unmatched -> "facedown"
-	int num_matches = 0;
-	if (symArr[rowc1][colc1] == symArr[rowc2][colc2])
-	{
-		matchedArr[rowc1][colc1] = 1;
-		matchedArr[rowc2][colc2] = 1;
-		num_matches++;
-	}
-	*/
-
-	for (int ri=0; ri<nrow; ri++)
-	{
-		for (int ci=0; ci<numc; ci++)
-		{
-			if (matchedArr[ri][ci] == 0)
-			{
-				printf("[ ] ");
-			}
-			else if (matchedArr[ri][ci] == 1)
-			{
-				printf("[%c] ", symArr[ri][ci]);
-			}
-		}
-		printf("\n");
-	}			
-}
