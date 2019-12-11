@@ -43,9 +43,20 @@ int main()
 				printf ("Enter Difficulty (1, 2, or 3): \n");
 				scanf ("%d", &difficultylevel);
 				difficulty = difficultylevel * 2;
+				
 				randomizedBoard(difficulty,value);
 				assignSpots(difficulty, value, symbol, board);
-				playGame (difficulty, board);
+				
+				score = playGame (difficulty, board);
+				
+				printf("Save score?\n1- yes "); 		// Edit display to executable
+				scanf("%d", save_choice);
+				switch (save_choice)
+				{
+					case 1: saveScore(score);
+						break;
+				}
+				
 				break;
 			case 2: // Display Scoreboard
 				readScores(scores, names);
