@@ -124,17 +124,19 @@ int playGame (int diff_size, char symbols[diff_size][diff_size])
 			matchedArr[r2][c2] = 1;
 			numMatches++;
 			scorecount++;
+			printf("Try Again!\n");			//Edit display to executable
 		}
-	displayBoard(diff_size, symbols, matchedArr);
-	printf ("You won dude!");	// Edit display to executable
-		
-	return scorecount;
+		else 
+		{
+			printf("Try Again!\n");			// Edit display to executable
+		}
 		
 	} while (numMatches != (diff_size*diff_size)/2);	// Until Game is Won
 	
 	displayBoard(diff_size, symbols, matchedArr);
-	
-	
+	printf ("You won dude!");	// Edit display to executable
+		
+	return scorecount;
 }
 
 void randomizedBoard(int size, int arr[])
