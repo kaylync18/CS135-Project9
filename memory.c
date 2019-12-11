@@ -18,9 +18,10 @@
 int getMenuChoice();
 void randomizedBoard (int size, int arr[]);
 void assignSpots( int size, int value[36], int symbol[36], int board[6][6]);
-//void generateBoard(int size);
-//void checkMatch(int size, int board[6][6],int xy[4],int match);
 int playGame (int diff_size, char symbols[diff_size][diff_size]);
+void displayBoard (int diff_size, char symArr[diff_size][diff_size], _Bool matchedArr);
+void saveScore(int newScore);
+void writeScores(int numScores, int *scores[], char *names[]);
 _Bool checkMatch(char symArr[], int r1, int c1, int r2, int c2);
 void getUserInput (int *row, int *col, int diff_size);
 int readScores(int *scores[], char *names[]);
@@ -289,85 +290,4 @@ void writeScores(int numScores, int *scores[], char *names[])
 	fclose (scores_fp);
 }
 
-
-/*void generateBoard(int size)
-{
-	for (int i = 0; i < size; i++)
-		{
-			for (int j = 0; j < size; j++)
-				{
-					printf ("[]");
-				}
-			printf ("\n");
-		}
-}
-*/
-/*void checkMatch(int size, int board[size][size],int xy[4], int match)
-{
-	int r1,c1,r2,c2, count = 0;
-
-	_Bool flag = 1;
-	do 
-	{
-	printf ("Enter your coordinates from 1 to %d\n", size);
-	scanf ("%d %d", &r1,&c1);
-		if (r1 < 0|| r1 > size|| c1 < 0 || c1 > size)
-		{
-			printf ("Please enter a valid coordinates\n");
-		}
-		else
-		{
-			flag = 0;
-		}
-	}while(flag);
-
-	flag = 1;
-	do 
-	{
-	printf ("Enter your coordinates from 1 to %d\n", size);
-	scanf ("%d %d", &r2,&c2);
-	if (r2< 0|| r2 > size|| c2 < 0 || c2 > size)
-	{
-		printf ("Please enter a valid coordinates\n");
-	}
-	else
-	{
-		flag = 0;
-	}
-	}while(flag);
-
-	for (int i = 0; i < size; i++)
-		{
-			int matches = size*size / 2;
-			for (int j = 0; j < size; j++)
-				{
-					if (((r1-1) == i && (c1-1) == j) || ((r2-1) == i && (c2-1) == j)) 
-						{
-							printf ("[%c]", board[i][j]);
-						}
-					else
-						{
-							printf ("[]");
-						}
-				}
-			printf ("\n");
-		}
-	if (board[r1-1][c1-1] == board[r2-1][c2-1])
-		{
-			printf ("MATCHED!\n");
-			count++;
-			xy[0] = count;
-			xy[1] = r1;
-			xy[2] = c1;
-			xy[3] = r2;
-			xy[4] = c2;
-			match++;
-		}
-	else
-		{
-			printf ("TRY AGAIN!\n");
-		}
-	
-}
-*/
 
