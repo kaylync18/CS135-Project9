@@ -28,7 +28,8 @@ int readScores(int *scores[], char *names[]);
 
 int main()
 {
-	int difficultylevel, difficulty, root,choice, value[36], board[6][6], xy[73], match = 0, score=0, save_choice;
+	int difficultylevel, difficulty, root,choice, xy[73], match = 0, score=0, save_choice;
+	char value[m*m], board[m][m];
 	int r1, c1, r2, c2;
 	int scores[SCORES];
 	char names[SCORES];
